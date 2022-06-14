@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<canvas width="400" height="400"></canvas>
-<script src="index.js"></script>
+<main class="wrapper">
+    <form class="inputs-form">
+        <input type="range" min="200" max="500" value="350" id="size-input" onchange="handleSize(this)">
+    </form>
+    <canvas></canvas>
+</main>
+<script src="index.js" type="module"></script>
 </body>
 </html>
