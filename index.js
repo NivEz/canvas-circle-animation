@@ -3,16 +3,16 @@ import {getRandomIntInclusive} from './utils.mjs'
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 350
-canvas.height = 350
+canvas.width = 400
+canvas.height = 400
 
-const line = new Line({
-    radius: 150,
-    randomRadius: false,
+export const line = new Line({
+    radius: 200,
     speed: 1,
-    singleLine: false,
+    isSingleLine: false,
     randomSpawn: false,
-    changeSizeUnit: 4
+    changeRadiusUnit: 0,
+    lineDash: []
 })
 
 const animate = () => {
@@ -24,35 +24,35 @@ const animate = () => {
 function Line({
                   width = canvas.width,
                   radius = canvas.width / 2,
-                  radiusIncrementVal = 1,
-                  randomRadius = false,
                   speed = 1,
-                  singleLine = false,
+                  isSingleLine = false,
                   randomSpawn = false,
-                  changeSizeUnit = 1,
-
+                  changeRadiusUnit = 0,
+                  lineDash = [],
               } = {}) {
     this.width = width;
     this.radius = radius;
-    this.initialRadius = radius;
-    this.angle = 1;
     this.speed = speed;
-    this.changeSizeUnit = changeSizeUnit;
-
+    this.isSingleLine = isSingleLine;
+    this.randomSpawn = randomSpawn;
+    this.changeRadiusUnit = changeRadiusUnit;
+    this.lineDash = lineDash;
 
     // local attributes
-    this.radiusIncrementVal = radiusIncrementVal;
-    this.direction = 0;
+    this.angle = 1;
+    this.direction = 1;
     this.maxRadius = Math.sqrt(2 * (this.width ** 2)) / 2
+    this.initialRadius = 200;
 
     this.update = () => {
         this.setAngleAndSpeed()
         this.setRadius()
+        ctx.setLineDash(this.lineDash);
     }
 
     this.draw = () => {
-        if (singleLine) {
-            ctx.clearRect(0, 0, this.width, this.width);
+        if (this.isSingleLine) {
+            this.destroy();
         }
         ctx.save()
         ctx.translate(this.width / 2, this.width / 2)
@@ -65,10 +65,10 @@ function Line({
     }
 
     this.setAngleAndSpeed = () => {
-        if (randomSpawn) {
+        if (this.randomSpawn) {
             this.angle = getRandomIntInclusive(0, 360)
         }
-        this.angle = (this.angle + this.speed);
+        this.angle = (this.angle + this.speed) % 360;
     }
 
     this.setRadius = () => {
@@ -81,23 +81,14 @@ function Line({
             this.radius = 0;
             this.direction = 1
         } else {
-            this.radius += this.changeSizeUnit * this.direction
+            this.radius += this.changeRadiusUnit * this.direction
         }
     }
+
+    this.destroy = () => {
+        ctx.clearRect(0, 0, this.width, this.width);
+    }
 }
-
-
-// form handling
-const handleSize = (el) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    line.angle = 360;
-    const newSize = el.value;
-    canvas.width = el.value
-    canvas.height = el.value
-}
-// const form = document.getElementsByTagName("form")
-// console.log("-> form", form);
-
 
 addEventListener('load', () => {
     requestAnimationFrame(animate)

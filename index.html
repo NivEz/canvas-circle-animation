@@ -8,10 +8,39 @@
 <body>
 <main class="wrapper">
     <form class="inputs-form">
-        <input type="range" min="200" max="500" value="350" id="size-input" onchange="handleSize(this)">
+        <div class="left">
+            <div class="flex-item">
+                <label for="radius">Radius</label>
+                <input type="range" min="1" max="200" value="200" id="radius">
+            </div>
+            <div class="flex-item">
+                <label for="speed">Speed</label>
+                <input type="range" min="1" max="50" value="1" id="speed">
+            </div>
+            <div class="flex-item">
+                <label for="radius-size-change">Radius size change</label>
+                <input type="range" min="0" value="0" max="400" id="radius-size-change">
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="flex-item checkbox">
+                <label for="single-line">Single line</label>
+                <input type="checkbox" id="single-line">
+            </div>
+            <div class="flex-item checkbox">
+                <label for="random-spawn">Random spawn</label>
+                <input type="checkbox" id="random-spawn">
+            </div>
+            <div class="flex-item text">
+                <label for="line-dash">Line dash</label>
+                <input type="text" id="line-dash" placeholder="Valid value: 4-20-1-8...">
+            </div>
+        </div>
     </form>
     <canvas></canvas>
 </main>
 <script src="index.js" type="module"></script>
+<script src="./js/form.js" type="module"></script>
 </body>
 </html>
