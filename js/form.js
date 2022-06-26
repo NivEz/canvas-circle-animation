@@ -1,4 +1,4 @@
-import {line} from '../index.js'
+import {line} from './canvas.js'
 
 const handleRadius = e => {
     line.radius = Number(e.target.value)
@@ -41,7 +41,7 @@ randomSpawnCheckbox.oninput = handleRandomSpawn;
 const handleRadiusChange = e => {
     let val = Number(e.target.value);
     if (!val) {
-        val = 1;
+        val = 0;
     }
     line.changeRadiusUnit = val;
 }
@@ -71,7 +71,12 @@ const lineDashInput = document.getElementById("line-dash");
 lineDashInput.onchange = lineDashHandler;
 
 
+const cleanButton = document.getElementById("clean-btn");
+cleanButton.onclick = () => line.destroy();
 
 
-
-
+const resetButton = document.getElementById("reset-btn");
+resetButton.onclick = () => {
+    location.reload();
+    line.destroy();
+}

@@ -6,21 +6,6 @@ const ctx = canvas.getContext("2d");
 canvas.width = 400
 canvas.height = 400
 
-export const line = new Line({
-    radius: 200,
-    speed: 1,
-    isSingleLine: false,
-    randomSpawn: false,
-    changeRadiusUnit: 0,
-    lineDash: []
-})
-
-const animate = () => {
-    line.update()
-    line.draw()
-    requestAnimationFrame(animate)
-}
-
 function Line({
                   width = canvas.width,
                   radius = canvas.width / 2,
@@ -88,6 +73,21 @@ function Line({
     this.destroy = () => {
         ctx.clearRect(0, 0, this.width, this.width);
     }
+}
+
+export const line = new Line({
+    radius: 200,
+    speed: 1,
+    isSingleLine: false,
+    randomSpawn: false,
+    changeRadiusUnit: 0,
+    lineDash: []
+})
+
+const animate = () => {
+    line.update()
+    line.draw()
+    requestAnimationFrame(animate)
 }
 
 addEventListener('load', () => {
