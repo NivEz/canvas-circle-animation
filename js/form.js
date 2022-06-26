@@ -1,6 +1,7 @@
 import {line} from './canvas.js'
 import state from "./state.js";
 
+// ----- radius -----
 const handleRadius = e => {
     line.radius = Number(e.target.value)
 }
@@ -11,6 +12,7 @@ radiusSlider.oninput = handleRadius
 radiusSlider.max = line.maxRadius;
 
 
+// ----- speed -----
 const handleSpeed = e => {
     let val = Number(e.target.value);
     if (!val) {
@@ -23,6 +25,7 @@ const speedInput = document.getElementById("speed");
 speedInput.oninput = handleSpeed
 
 
+// ----- single line -----
 const handleIsSingleLine = e => {
     line.isSingleLine = e.target.checked;
 }
@@ -31,6 +34,7 @@ const singeLineCheckBox = document.getElementById("single-line");
 singeLineCheckBox.oninput = handleIsSingleLine
 
 
+// ----- random spawn -----
 const handleRandomSpawn = e => {
     line.randomSpawn = e.target.checked;
 }
@@ -39,6 +43,7 @@ const randomSpawnCheckbox = document.getElementById("random-spawn")
 randomSpawnCheckbox.oninput = handleRandomSpawn;
 
 
+// ----- radius change -----
 const handleRadiusChange = e => {
     let val = Number(e.target.value);
     if (!val) {
@@ -51,13 +56,30 @@ const radiusSizeChangeSlider = document.getElementById("radius-size-change");
 radiusSizeChangeSlider.oninput = handleRadiusChange;
 
 
-const colorHandler = e => {
-    line.baseColor = e.target.value;
+// ----- colors -----
+const baseColorPicker = document.getElementById("base-color");
+baseColorPicker.oninput = e => line.baseColor = e.target.value;
+
+const secondColorPicker = document.getElementById("second-color");
+const secondColorCheckbox = document.getElementById("second-color-checkbox");
+
+secondColorCheckbox.oninput = e => {
+    const isChecked = e.target.checked;
+    // toggle - enable or disable checkbox
+    secondColorPicker.disabled = !isChecked;
+    if (isChecked) {
+        line.secondColor = secondColorPicker.value;
+    } else {
+        line.secondColor = "";
+    }
 }
-const colorPicker = document.getElementById("color-picker");
-colorPicker.oninput = colorHandler;
+
+secondColorPicker.oninput = e => {
+    line.secondColor = e.target.value;
+}
 
 
+// ----- line dash -----
 const lineDashHandler = e => {
     let val = e.target.value;
     let lineDashResult;
@@ -79,16 +101,15 @@ const lineDashInput = document.getElementById("line-dash");
 lineDashInput.onchange = lineDashHandler;
 
 
+// ----- buttons -----
 const cleanButton = document.getElementById("clean-btn");
 cleanButton.onclick = () => line.destroy();
-
 
 const stopButton = document.getElementById("stop-btn");
 stopButton.onclick = () => {
     state.stop = !state.stop;
     stopButton.innerText = state.stop ? "Play" : "Pause";
 }
-
 
 const resetButton = document.getElementById("reset-btn");
 resetButton.onclick = () => {

@@ -46,6 +46,18 @@ main {
     gap: 1rem;
 }
 
+.second-color {
+    justify-content: flex-start;
+}
+
+.second-color > label {
+    margin-right: 0.5rem;
+}
+
+#second-color {
+    margin-left: auto;
+}
+
 .form-btn {
     width: 6rem;
     white-space: nowrap;

@@ -16,6 +16,7 @@ function Line({
                   changeRadiusUnit = 0,
                   lineDash = [],
                   baseColor = "black",
+                  secondColor = "",
               } = {}) {
     this.width = width;
     this.radius = radius;
@@ -25,6 +26,7 @@ function Line({
     this.changeRadiusUnit = changeRadiusUnit;
     this.lineDash = lineDash;
     this.baseColor = baseColor;
+    this.secondColor = secondColor;
 
     // local attributes
     this.angle = 1;
@@ -77,9 +79,14 @@ function Line({
     }
 
     this.handleColors = () => {
-
-
-        ctx.strokeStyle = this.baseColor;
+        if (this.secondColor) {
+            let gradient = ctx.createLinearGradient(0, 0, this.radius, 0);
+            gradient.addColorStop(0, this.baseColor);
+            gradient.addColorStop(1, this.secondColor);
+            ctx.strokeStyle = gradient;
+        } else {
+            ctx.strokeStyle = this.baseColor;
+        }
     }
 
     this.destroy = () => {
