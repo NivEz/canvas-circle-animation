@@ -1,59 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Canvas Circle</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<main>
-    <form class="inputs-form">
-        <div class="left">
-            <div class="flex-item">
-                <label for="radius">Radius</label>
-                <input type="range" min="1" max="200" value="200" id="radius">
-            </div>
-            <div class="flex-item">
-                <label for="speed">Speed</label>
-                <input type="range" min="1" max="50" value="1" id="speed">
-            </div>
-            <div class="flex-item">
-                <label for="radius-size-change">Radius size change</label>
-                <input type="range" min="0" value="0" max="350" id="radius-size-change">
-            </div>
-            <div class="flex-item">
-                <label for="base-color">Color</label>
-                <input type="color" id="base-color">
-            </div>
-        </div>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Canvas Circle</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <main>
+            <form class="inputs-form">
+                <div class="left">
+                    <div class="flex-item">
+                        <label for="radius">Radius</label>
+                        <input
+                            type="range"
+                            min="1"
+                            max="200"
+                            value="200"
+                            id="radius"
+                        />
+                    </div>
+                    <div class="flex-item">
+                        <label for="speed">Speed</label>
+                        <input
+                            type="range"
+                            min="1"
+                            max="50"
+                            value="1"
+                            id="speed"
+                        />
+                    </div>
+                    <div class="flex-item">
+                        <label for="radius-size-change"
+                            >Radius size change</label
+                        >
+                        <input
+                            type="range"
+                            min="0"
+                            value="0"
+                            max="350"
+                            id="radius-size-change"
+                        />
+                    </div>
+                    <div class="flex-item">
+                        <label for="base-color">Color</label>
+                        <input type="color" id="base-color" />
+                    </div>
+                </div>
 
-        <div class="right">
-            <div class="flex-item checkbox">
-                <label for="single-line">Single line</label>
-                <input type="checkbox" id="single-line">
+                <div class="right">
+                    <div class="flex-item checkbox">
+                        <label for="single-line">Single line</label>
+                        <input type="checkbox" id="single-line" />
+                    </div>
+                    <div class="flex-item checkbox">
+                        <label for="random-spawn">Random spawn</label>
+                        <input type="checkbox" id="random-spawn" />
+                    </div>
+                    <div class="flex-item text">
+                        <label for="line-dash">Line dash</label>
+                        <input
+                            type="text"
+                            id="line-dash"
+                            placeholder="Valid value: 4-20-1-8..."
+                        />
+                    </div>
+                    <div class="flex-item second-color">
+                        <label for="second-color">Second color</label>
+                        <input type="checkbox" id="second-color-checkbox" />
+                        <input type="color" id="second-color" disabled />
+                    </div>
+                </div>
+            </form>
+            <div>
+                <button type="button" id="clean-btn" class="form-btn">
+                    Clean canvas
+                </button>
+                <button type="button" id="stop-btn" class="form-btn">
+                    Stop
+                </button>
+                <button type="button" id="reset-btn" class="form-btn">
+                    Reset
+                </button>
             </div>
-            <div class="flex-item checkbox">
-                <label for="random-spawn">Random spawn</label>
-                <input type="checkbox" id="random-spawn">
-            </div>
-            <div class="flex-item text">
-                <label for="line-dash">Line dash</label>
-                <input type="text" id="line-dash" placeholder="Valid value: 4-20-1-8...">
-            </div>
-            <div class="flex-item second-color">
-                <label for="second-color">Second color</label>
-                <input type="checkbox" id="second-color-checkbox">
-                <input type="color" id="second-color" disabled>
-            </div>
-        </div>
-    </form>
-    <div>
-        <button type="button" id="clean-btn" class="form-btn">Clean canvas</button>
-        <button type="button" id="stop-btn" class="form-btn">Stop</button>
-        <button type="button" id="reset-btn" class="form-btn">Reset</button>
-    </div>
-    <canvas></canvas>
-</main>
-<script src="./js/form.js" type="module"></script>
-</body>
+            <canvas></canvas>
+        </main>
+        <script src="./js/form.js" type="module"></script>
+    </body>
 </html>
