@@ -1,10 +1,11 @@
-import {getRandomIntInclusive} from './utils.mjs'
+import {getRandomIntInclusive} from './utils.js'
+import state from './state.js';
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 400
-canvas.height = 400
+canvas.width = 400;
+canvas.height = 400;
 
 function Line({
                   width = canvas.width,
@@ -14,6 +15,7 @@ function Line({
                   randomSpawn = false,
                   changeRadiusUnit = 0,
                   lineDash = [],
+                  baseColor = "black",
               } = {}) {
     this.width = width;
     this.radius = radius;
@@ -22,6 +24,7 @@ function Line({
     this.randomSpawn = randomSpawn;
     this.changeRadiusUnit = changeRadiusUnit;
     this.lineDash = lineDash;
+    this.baseColor = baseColor;
 
     // local attributes
     this.angle = 1;
@@ -45,6 +48,9 @@ function Line({
         ctx.beginPath()
         ctx.moveTo(0, 0)
         ctx.lineTo(this.radius, 0)
+
+        this.handleColors()
+
         ctx.stroke()
         ctx.restore()
     }
@@ -70,6 +76,12 @@ function Line({
         }
     }
 
+    this.handleColors = () => {
+
+
+        ctx.strokeStyle = this.baseColor;
+    }
+
     this.destroy = () => {
         ctx.clearRect(0, 0, this.width, this.width);
     }
@@ -85,8 +97,10 @@ export const line = new Line({
 })
 
 const animate = () => {
-    line.update()
-    line.draw()
+    if (state.stop === false) {
+        line.update()
+        line.draw()
+    }
     requestAnimationFrame(animate)
 }
 

@@ -1,4 +1,5 @@
 import {line} from './canvas.js'
+import state from "./state.js";
 
 const handleRadius = e => {
     line.radius = Number(e.target.value)
@@ -47,7 +48,14 @@ const handleRadiusChange = e => {
 }
 
 const radiusSizeChangeSlider = document.getElementById("radius-size-change");
-radiusSizeChangeSlider.oninput = handleRadiusChange
+radiusSizeChangeSlider.oninput = handleRadiusChange;
+
+
+const colorHandler = e => {
+    line.baseColor = e.target.value;
+}
+const colorPicker = document.getElementById("color-picker");
+colorPicker.oninput = colorHandler;
 
 
 const lineDashHandler = e => {
@@ -73,6 +81,13 @@ lineDashInput.onchange = lineDashHandler;
 
 const cleanButton = document.getElementById("clean-btn");
 cleanButton.onclick = () => line.destroy();
+
+
+const stopButton = document.getElementById("stop-btn");
+stopButton.onclick = () => {
+    state.stop = !state.stop;
+    stopButton.innerText = state.stop ? "Play" : "Pause";
+}
 
 
 const resetButton = document.getElementById("reset-btn");

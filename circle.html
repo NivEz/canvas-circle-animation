@@ -19,7 +19,11 @@
             </div>
             <div class="flex-item">
                 <label for="radius-size-change">Radius size change</label>
-                <input type="range" min="0" value="0" max="400" id="radius-size-change">
+                <input type="range" min="0" value="0" max="350" id="radius-size-change">
+            </div>
+            <div class="flex-item">
+                <label for="color-picker">Color</label>
+                <input type="color" id="color-picker">
             </div>
         </div>
 
@@ -36,10 +40,16 @@
                 <label for="line-dash">Line dash</label>
                 <input type="text" id="line-dash" placeholder="Valid value: 4-20-1-8...">
             </div>
+            <div class="flex-item">
+                <input type="checkbox" id="second-color-checkbox">
+                <label for="second-color">Second color</label>
+                <input type="color" id="second-color" disabled>
+            </div>
         </div>
     </form>
     <div>
         <button type="button" id="clean-btn" class="form-btn">Clean canvas</button>
+        <button type="button" id="stop-btn" class="form-btn">Stop</button>
         <button type="button" id="reset-btn" class="form-btn">Reset</button>
     </div>
     <canvas></canvas>
