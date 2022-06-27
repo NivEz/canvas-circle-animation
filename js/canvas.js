@@ -1,4 +1,4 @@
-import { getRandomIntInclusive } from "./utils.js";
+import {getRandomIntInclusive} from "./utils.js";
 import state from "./state.js";
 
 const canvas = document.querySelector("canvas");
@@ -11,15 +11,15 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
 function Line({
-    radius = canvas.width / 2,
-    speed = 1,
-    isSingleLine = false,
-    randomSpawn = false,
-    changeRadiusUnit = 0,
-    lineDash = [],
-    baseColor = "black",
-    secondColor = "",
-} = {}) {
+                  radius = canvas.width / 2,
+                  speed = 1,
+                  isSingleLine = false,
+                  randomSpawn = false,
+                  changeRadiusUnit = 0,
+                  lineDash = [],
+                  baseColor = "black",
+                  secondColor = "",
+              } = {}) {
     this.radius = radius;
     this.speed = speed;
     this.isSingleLine = isSingleLine;
@@ -33,7 +33,7 @@ function Line({
     this.angle = 1;
     this.direction = 1;
     this.maxRadius = Math.sqrt(2 * WIDTH ** 2) / 2;
-    this.initialRadius = 200;
+    this.chosenRadius = radius;
 
     this.update = () => {
         this.setAngleAndSpeed();
@@ -66,9 +66,9 @@ function Line({
     };
 
     this.setRadius = () => {
-        if (this.radius >= this.initialRadius && this.direction !== -1) {
+        if (this.radius >= this.chosenRadius && this.direction !== -1) {
             // make smaller
-            this.radius = this.initialRadius;
+            this.radius = this.chosenRadius;
             this.direction = -1;
         } else if (this.radius <= 0 && this.direction !== 1) {
             // make bigger

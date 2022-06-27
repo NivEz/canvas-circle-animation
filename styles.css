@@ -14,12 +14,12 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.75rem;
 }
 
 .inputs-form {
     display: flex;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 .left {
@@ -31,14 +31,20 @@ main {
 }
 
 .flex-item {
-    height: 2rem;
+    height: 2.25rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.checkbox {
-    width: 50%;
+.slider-and-val-container {
+    position: relative;
+}
+
+.slider-and-val-container > span {
+    font-size: 12px;
+    position: absolute;
+    bottom: 85%;
 }
 
 .text {

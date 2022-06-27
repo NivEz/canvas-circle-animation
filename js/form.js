@@ -1,9 +1,13 @@
-import { line } from "./canvas.js";
+import {line} from "./canvas.js";
 import state from "./state.js";
+
 
 // ----- radius -----
 const handleRadius = (e) => {
-    line.radius = Number(e.target.value);
+    const val = Number(e.target.value);
+    line.radius = val;
+    line.chosenRadius = val;
+    radiusSizeDisplayValEl.innerText = val;
 };
 
 const radiusSlider = document.getElementById("radius");
@@ -11,9 +15,11 @@ radiusSlider.oninput = handleRadius;
 // set max radius size
 radiusSlider.max = line.maxRadius;
 
+
 // ----- speed -----
 const handleSpeed = (e) => {
     let val = Number(e.target.value);
+    speedDisplayValEl.innerText = val;
     if (!val) {
         val = 1;
     }
@@ -23,6 +29,32 @@ const handleSpeed = (e) => {
 const speedInput = document.getElementById("speed");
 speedInput.oninput = handleSpeed;
 
+
+// ----- radius change -----
+const handleRadiusChange = (e) => {
+    let val = Number(e.target.value);
+    radiusChangeDisplayValEl.innerText = val;
+    if (!val) {
+        val = 0;
+    }
+    line.changeRadiusUnit = val;
+};
+
+const radiusSizeChangeSlider = document.getElementById("radius-size-change");
+radiusSizeChangeSlider.oninput = handleRadiusChange;
+
+
+// ----- sliders value -----
+const radiusSizeDisplayValEl = document.getElementById("radius-val");
+radiusSizeDisplayValEl.innerText = radiusSlider.value;
+
+const speedDisplayValEl = document.getElementById("speed-val");
+speedDisplayValEl.innerText = speedInput.value;
+
+const radiusChangeDisplayValEl = document.getElementById("radius-size-change-val");
+radiusChangeDisplayValEl.innerText = radiusSizeChangeSlider.value;
+
+
 // ----- single line -----
 const handleIsSingleLine = (e) => {
     line.isSingleLine = e.target.checked;
@@ -30,6 +62,7 @@ const handleIsSingleLine = (e) => {
 
 const singeLineCheckBox = document.getElementById("single-line");
 singeLineCheckBox.oninput = handleIsSingleLine;
+
 
 // ----- random spawn -----
 const handleRandomSpawn = (e) => {
@@ -39,17 +72,6 @@ const handleRandomSpawn = (e) => {
 const randomSpawnCheckbox = document.getElementById("random-spawn");
 randomSpawnCheckbox.oninput = handleRandomSpawn;
 
-// ----- radius change -----
-const handleRadiusChange = (e) => {
-    let val = Number(e.target.value);
-    if (!val) {
-        val = 0;
-    }
-    line.changeRadiusUnit = val;
-};
-
-const radiusSizeChangeSlider = document.getElementById("radius-size-change");
-radiusSizeChangeSlider.oninput = handleRadiusChange;
 
 // ----- colors -----
 const baseColorPicker = document.getElementById("base-color");
@@ -73,6 +95,7 @@ secondColorPicker.oninput = (e) => {
     line.secondColor = e.target.value;
 };
 
+
 // ----- line dash -----
 const lineDashHandler = (e) => {
     let val = e.target.value;
@@ -93,6 +116,7 @@ const lineDashHandler = (e) => {
 
 const lineDashInput = document.getElementById("line-dash");
 lineDashInput.onchange = lineDashHandler;
+
 
 // ----- buttons -----
 const cleanButton = document.getElementById("clean-btn");
