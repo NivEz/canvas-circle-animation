@@ -1,5 +1,4 @@
 import {getRandomIntInclusive} from "./utils.js";
-import state from "./state.js";
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
@@ -10,16 +9,16 @@ const HEIGHT = 400;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-function Line({
-                  radius = canvas.width / 2,
-                  speed = 1,
-                  isSingleLine = false,
-                  randomSpawn = false,
-                  changeRadiusUnit = 0,
-                  lineDash = [],
-                  baseColor = "black",
-                  secondColor = "",
-              } = {}) {
+export function Line({
+                         radius = WIDTH / 2,
+                         speed = 1,
+                         isSingleLine = false,
+                         randomSpawn = false,
+                         changeRadiusUnit = 0,
+                         lineDash = [],
+                         baseColor = "black",
+                         secondColor = "",
+                     } = {}) {
     this.radius = radius;
     this.speed = speed;
     this.isSingleLine = isSingleLine;
@@ -46,7 +45,7 @@ function Line({
             this.destroy();
         }
         ctx.save();
-        ctx.translate(WIDTH / 2, HEIGHT / 2);
+        ctx.translate(WIDTH / 2, WIDTH / 2);
         ctx.rotate((this.angle * Math.PI) / 180);
         ctx.beginPath();
         ctx.moveTo(0, 0);
@@ -91,7 +90,7 @@ function Line({
     };
 
     this.destroy = () => {
-        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        ctx.clearRect(0, 0, WIDTH, WIDTH);
     };
 }
 
@@ -104,16 +103,4 @@ export const line = new Line({
     lineDash: [],
     baseColor: "black",
     secondColor: "",
-});
-
-const animate = () => {
-    if (state.stop === false) {
-        line.update();
-        line.draw();
-    }
-    requestAnimationFrame(animate);
-};
-
-addEventListener("load", () => {
-    requestAnimationFrame(animate);
 });
